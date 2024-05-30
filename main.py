@@ -17,10 +17,11 @@ def euler_method(t0, T, h0, Nx, eps, func, y0):
     y = y0
     h = h0
     counter = [0]
+    tol = 1e-12
 
     print(f"{t:13.6f}{h:13.6f}{0:13.5e}{counter[0]:13d}", *[f"{x:12.6f}" for x in y])
 
-    while t < T and counter[0] < Nx:
+    while t < T - tol and counter[0] < Nx:
         # Найти приближенное значение y_k с шагом h
         y1 = euler_method_step(t, y, h)
 
@@ -60,6 +61,6 @@ function_definition = "\n".join(function_code)
 exec(function_definition)
 
 input_string = input()
-initial_conditions = [int(x) for x in input_string.split()]
+initial_conditions = [float(x) for x in input_string.split()]
 
 euler_method(t_0, T, h_0, N_x, eps, fs, initial_conditions)
